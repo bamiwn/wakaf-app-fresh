@@ -1,58 +1,51 @@
-@extends('master')
-@include('layouts/nazir/aside')
+@extends('layouts.app')
 @section('title', 'Kinerja Nazir')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <div class="card shadow" style="margin: 60px 0 200px 0;">
-                <div class="card-body">
-                <h2>Daftar Kinerja</h2>
-                <hr class="lead">
-                <div style="overflow-x: auto;">
-                    <table id="data" class="table table-striped table-bordered text-center">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Keuangan ke-</th>
-                                <th>Proporsi</th>
-                                <th>Multiplayer</th>
-                                <th>Produktivitas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($keuangan as $k)
-                                <tr>
-                                    @if (auth()->user()->id == $k->FK_USER)
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $k->ID_KEUANGAN_NAZIR }}</td>
+<div class="main py-4">
+    <div class="card card-body border-0 shadow table-wrapper table-responsive">
+        <h2 class="mb-4 h5">{{ __('Kinerja Nazir') }}</h2>
 
-                                        @foreach ($proporsi as $p)
-                                            @if ($k->ID_KEUANGAN_NAZIR == $p->FK_KN )
-                                                <td>{{ $p->NILAI_TOTAL }} ({{ $p->KINERJA }})</td>
-                                            @endif
-                                        @endforeach
+        <table id="data" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Keuangan ke-</th>
+                    <th>Dibuat Pada</th>
+                    <th>Proporsi</th>
+                    <th>Multiplayer</th>
+                    <th>Produktivitas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($keuangan as $k)
+                    <tr>
+                        @if (auth()->user()->id == $k->user_id)
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $k->id }}</td>
+                            <td>{{ date('d F Y', strtotime($k->created_at)) }}</td>
 
-                                        @foreach ($efisiensi as $e)
-                                            @if ($k->ID_KEUANGAN_NAZIR == $e->FK_KN )
-                                                <td>{{ $e->NILAI_TOTAL }} ({{ $e->KINERJA }})</td>
-                                            @endif
-                                        @endforeach
-
-                                        @foreach ($hasilPengelolaan as $hp)
-                                            @if ($k->ID_KEUANGAN_NAZIR == $hp->FK_KN )
-                                                <td>{{ $hp->NILAI_TOTAL }} ({{ $hp->KINERJA }})</td>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </tr>
+                            @foreach ($proporsi as $p)
+                                @if ($k->id == $p->keuangan_nazir_id )
+                                    <td>{{ $p->nilai_total }} ({{ $p->kinerja }})</td>
+                                @endif
                             @endforeach
-                        </tbody>
-                    </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+                            @foreach ($efisiensi as $e)
+                                @if ($k->id == $e->keuangan_nazir_id )
+                                    <td>{{ $e->nilai_total }} ({{ $e->kinerja }})</td>
+                                @endif
+                            @endforeach
+
+                            @foreach ($hasilPengelolaan as $hp)
+                                @if ($k->id == $hp->keuangan_nazir_id )
+                                    <td>{{ $hp->nilai_total }} ({{ $hp->kinerja }})</td>
+                                @endif
+                            @endforeach
+                        @endif
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 @endsection

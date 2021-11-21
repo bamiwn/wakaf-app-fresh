@@ -51,7 +51,7 @@ Route::prefix('admin')->middleware(['admin', 'verified'])->name('admin.')->group
 // NAZIR
 Route::prefix('nazir')->middleware(['auth', 'verified'])->name('nazir.')->group(function () {
     Route::view('/dashboard', 'nazir/dashboard')->name('dashboard');
-    Route::view('/kinerja-nazir', 'nazir/kinerja-nazir/index', [
+    Route::view('/kinerja-nazir', 'nazir/nazir-kinerja', [
         'keuangan'         => KeuanganNazir::all(),
         'proporsi'         => Proporsi::all(),
         'efisiensi'        => Efisiensi::all(),
