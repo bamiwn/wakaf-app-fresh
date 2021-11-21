@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script>
     let rupiah = document.querySelectorAll("form#input-keuangan input");
 
     for(let i = 0; i < rupiah.length; i ++) {

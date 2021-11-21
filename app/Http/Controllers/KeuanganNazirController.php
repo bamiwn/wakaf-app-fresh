@@ -217,7 +217,7 @@ class KeuanganNazirController extends Controller
         $efisiensi->delete();
         $hasil_pengelolaan->delete();
         $deleteState = "Data Keuangan ke-" . $id . " Berhasil dihapus!";
-        return redirect('/nazir/keuangan-nazir')->with('doneDelete', $deleteState);
+        return redirect()->route('nazir.keuangan.index')->with('doneDelete', $deleteState);
     }
 
     public function hitung($id)

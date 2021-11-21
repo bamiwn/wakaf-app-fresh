@@ -15,9 +15,7 @@ use App\Http\Controllers\KeuanganNazirController;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', function () {
-    return view('landing-page');
-});
+Route::view('/', 'landing-page');
 
 
 Route::middleware('auth', 'verified')->group(function () {
@@ -64,10 +62,10 @@ Route::prefix('nazir')->middleware(['auth', 'verified'])->name('nazir.')->group(
         Route::get('/', [KeuanganNazirController::class, 'index'])->name('index');
         Route::get('/create', [KeuanganNazirController::class, 'create'])->name('create');
         Route::post('/store', [KeuanganNazirController::class, 'store'])->name('store');
-        Route::put('/edit/{id}', [KeuanganNazirController::class, 'edit'])->name('edit');
-        Route::post('/update/{id}', [KeuanganNazirController::class, 'update'])->name('update');
-        Route::delete('/delete/{id}', [KeuanganNazirController::class, 'destroy'])->name('destroy');
-        Route::get('/hitung/{id}', [KeuanganNazirController::class, 'hitung'])->name('hitung');
+        Route::get('/edit/{id}', [KeuanganNazirController::class, 'edit']);
+        Route::post('/update/{id}', [KeuanganNazirController::class, 'update']);
+        Route::get('/destroy/{id}', [KeuanganNazirController::class, 'destroy']);
+        Route::get('/hitung/{id}', [KeuanganNazirController::class, 'hitung']);
     });
 });
 
