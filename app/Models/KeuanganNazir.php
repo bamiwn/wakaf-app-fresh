@@ -29,6 +29,6 @@ class KeuanganNazir extends Model
 
     public function relasiUser()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

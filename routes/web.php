@@ -34,18 +34,18 @@ Route::prefix('admin')->middleware(['admin', 'verified'])->name('admin.')->group
         'hp_terbaik'        => HasilPengelolaan::max('nilai_total'),
     ])->name('dashboard');
 
-    Route::view('data-nazir', 'admin/data-nazir/index', [
+    Route::view('data-nazir', 'admin/nazir-data', [
         'user'     => User::all(),
         'keuangan' => KeuanganNazir::all()
-    ])->name('data.nazir');
+    ])->name('nazir.data');
 
-    Route::view('kinerja-nazir', 'admin/kinerja-nazir/index', [
+    Route::view('kinerja-nazir', 'admin/nazir-kinerja', [
         'user'             => User::all(),
         'keuangan'         => KeuanganNazir::all(),
         'proporsi'         => Proporsi::all(),
         'efisiensi'        => Efisiensi::all(),
         'hasilPengelolaan' => HasilPengelolaan::all()
-    ])->name('kinerja.nazir');
+    ])->name('nazir.kinerja');
 });
     
 // NAZIR
