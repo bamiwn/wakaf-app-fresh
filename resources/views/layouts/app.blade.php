@@ -48,6 +48,8 @@
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{ asset('assets/js/volt.js') }}"></script>
+
+    @include('components.js-rupiah');
     
 </body>
 

@@ -89,7 +89,4 @@
             </form>
         </div>
     </div>
-{{--  
-@section('scripts-mandiri')
-@include('components.js-rupiah') --}}
 @endsection
