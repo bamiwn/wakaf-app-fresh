@@ -13,6 +13,7 @@
                         <th>Nama Nazir</th>
                         <th>Email</th>
                         <th>Status Verifikasi</th>
+                        <th>Registrasi Pada</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,8 @@
                                 @else
                                     <td class="text-danger"><span class="badge bg-danger fs-6"> Belum Verifikasi</span></td>
                                 @endif
+
+                                <td>{{ date('d F Y h:i:s A', strtotime($u->created_at)) }}</td>
                             </tr>
                         @endif
                     @endforeach

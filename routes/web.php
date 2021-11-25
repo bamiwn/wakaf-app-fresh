@@ -28,10 +28,9 @@ Route::middleware('auth', 'verified')->group(function () {
 // ADMIN
 Route::prefix('admin')->middleware(['admin', 'verified'])->name('admin.')->group(function() {
     Route::view('dashboard', 'admin/dashboard-admin', [
-        'jumlah_user'       => User::count(),
-        'proporsi_terbaik'  => Proporsi::max('nilai_total'),
-        'efisiensi_terbaik' => Efisiensi::max('nilai_total'),
-        'hp_terbaik'        => HasilPengelolaan::max('nilai_total'),
+        'rata_proporsi'  => Proporsi::avg('nilai_total'),
+        'rata_efisiensi' => Efisiensi::avg('nilai_total'),
+        'rata_hp'        => HasilPengelolaan::avg('nilai_total'),
     ])->name('dashboard');
 
     Route::view('data-nazir', 'admin/nazir-data', [

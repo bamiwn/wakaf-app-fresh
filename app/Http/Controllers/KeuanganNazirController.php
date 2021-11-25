@@ -146,7 +146,7 @@ class KeuanganNazirController extends Controller
 
     public function edit($id)
     {
-        $keuangan_nazir = KeuanganNazir::find($id);
+        $keuangan_nazir = KeuanganNazir::findOrFail($id);
         return view('nazir/keuangan-nazir/edit', [
             'keuangan_nazir' => $keuangan_nazir,
             'title'          => 'Edit Keuangan'
@@ -155,7 +155,7 @@ class KeuanganNazirController extends Controller
 
     public function update(Request $request, $id)
     {
-        $keuangan_nazir = KeuanganNazir::find($id);
+        $keuangan_nazir = KeuanganNazir::findOrFail($id);
         // TANGKAP NILAI  SESUAI ID
         $keuangan_nazir->pwp       = $request->PWP;
         $keuangan_nazir->pwt       = $request->PWT;
@@ -186,15 +186,15 @@ class KeuanganNazirController extends Controller
         $kinerjaHp        = $this->kinerjaNazir($hpNew, 4.5, 10);
 
         // TANGKAP DATA MASUKIN TABEL PROPORSI, EFISIENSI, DAN HP
-        $proporsi              = Proporsi::find($id);
+        $proporsi              = Proporsi::findOrFail($id);
         $proporsi->nilai_total = $proporsiNew;
         $proporsi->kinerja     = $kinerjaProporsi;
 
-        $efisiensi              = Efisiensi::find($id);
+        $efisiensi              = Efisiensi::findOrFail($id);
         $efisiensi->nilai_total = $efisiensiNew;
         $efisiensi->kinerja     = $kinerjaEfisiensi;
 
-        $hasil_pengelolaan              = HasilPengelolaan::find($id);
+        $hasil_pengelolaan              = HasilPengelolaan::findOrFail($id);
         $hasil_pengelolaan->nilai_total = $hpNew;
         $hasil_pengelolaan->kinerja     = $kinerjaHp;
 
@@ -208,10 +208,10 @@ class KeuanganNazirController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $keuangan_nazir    = KeuanganNazir::find($id);
-        $proporsi          = Proporsi::find($id);
-        $efisiensi         = Efisiensi::find($id);
-        $hasil_pengelolaan = HasilPengelolaan::find($id);
+        $keuangan_nazir    = KeuanganNazir::findOrFail($id);
+        $proporsi          = Proporsi::findOrFail($id);
+        $efisiensi         = Efisiensi::findOrFail($id);
+        $hasil_pengelolaan = HasilPengelolaan::findOrFail($id);
         $keuangan_nazir->delete();
         $proporsi->delete();
         $efisiensi->delete();
@@ -222,7 +222,7 @@ class KeuanganNazirController extends Controller
 
     public function hitung($id)
     {
-        $keuangan_nazir = KeuanganNazir::find($id);
+        $keuangan_nazir = KeuanganNazir::findOrFail($id);
         // TANGKAP NILAI  SESUAI ID
         $pwp       = $keuangan_nazir->pwp;
         $pwt       = $keuangan_nazir->pwt;
